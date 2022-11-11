@@ -4,7 +4,7 @@ use crate::command::CommandExt;
 use crate::error::{self, TopgradeError};
 use crate::terminal::print_separator;
 use crate::{execution_context::ExecutionContext, utils::require};
-use log::{debug, error, warn};
+use tracing::{debug, error, warn};
 use std::path::Path;
 use std::process::Command;
 

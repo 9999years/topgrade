@@ -8,9 +8,7 @@ use anyhow::Context;
 use anyhow::{anyhow, Result};
 use clap::{crate_version, Parser};
 use console::Key;
-use log::debug;
-use log::LevelFilter;
-use pretty_env_logger::formatted_timed_builder;
+use tracing::debug;
 
 use self::config::{CommandLineArgs, Config, Step};
 use self::error::StepFailed;
@@ -37,10 +35,11 @@ mod utils;
 
 fn run() -> Result<()> {
     ctrlc::set_handler();
-
     let base_dirs = directories::BaseDirs::new().ok_or_else(|| anyhow!("No base directories"))?;
 
     let opt = CommandLineArgs::parse();
+
+    install_tracing(&opt.tracing_filter_directives())?;
 
     for env in opt.env_variables() {
         let mut splitted = env.split('=');
@@ -49,13 +48,9 @@ fn run() -> Result<()> {
         env::set_var(var, value);
     }
 
-    let mut builder = formatted_timed_builder();
-
-    if opt.verbose {
-        builder.filter(Some("topgrade"), LevelFilter::Trace);
-    }
-
-    builder.init();
+    // if opt.verbose {
+    // builder.filter(Some("topgrade"), LevelFilter::Trace);
+    // }
 
     if opt.edit_config() {
         Config::edit(&base_dirs)?;
@@ -534,4 +529,27 @@ fn main() {
             exit(1);
         }
     }
+}
+
+pub fn install_tracing(filter_directives: &str) -> anyhow::Result<()> {
+    use tracing_subscriber::fmt;
+    use tracing_subscriber::fmt::format::FmtSpan;
+    use tracing_subscriber::layer::SubscriberExt;
+    use tracing_subscriber::util::SubscriberInitExt;
+    use tracing_subscriber::EnvFilter;
+
+    let env_filter = EnvFilter::try_new(filter_directives)
+        .or_else(|_| EnvFilter::try_from_default_env())
+        .or_else(|_| EnvFilter::try_new("info"))?;
+
+    let fmt_layer = fmt::layer()
+        .with_target(false)
+        .with_span_events(FmtSpan::NEW | FmtSpan::CLOSE)
+        .without_time();
+
+    let registry = tracing_subscriber::registry();
+
+    registry.with(env_filter).with(fmt_layer).init();
+
+    Ok(())
 }

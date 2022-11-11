@@ -4,7 +4,7 @@ use crate::execution_context::ExecutionContext;
 use crate::report::{Report, StepResult};
 use crate::{config::Step, terminal::should_retry};
 use anyhow::Result;
-use log::debug;
+use tracing::debug;
 use std::borrow::Cow;
 use std::fmt::Debug;
 

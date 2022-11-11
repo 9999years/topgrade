@@ -9,7 +9,7 @@ use crate::{
     utils::{require, PathExt},
 };
 use directories::BaseDirs;
-use log::debug;
+use tracing::debug;
 use std::path::PathBuf;
 use std::{
     io::{self, Write},

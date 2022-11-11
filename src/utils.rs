@@ -1,7 +1,7 @@
 use crate::error::SkipStep;
 use anyhow::Result;
 
-use log::{debug, error};
+use tracing::{debug, error};
 use std::env;
 use std::ffi::OsStr;
 use std::fmt::Debug;

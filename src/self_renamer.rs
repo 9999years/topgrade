@@ -1,7 +1,7 @@
 #![cfg(windows)]
 
 use anyhow::Result;
-use log::{debug, error};
+use tracing::{debug, error};
 use std::{env::current_exe, fs, path::PathBuf};
 
 pub struct SelfRenamer {

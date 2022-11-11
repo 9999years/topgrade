@@ -5,7 +5,7 @@ use std::path::PathBuf;
 use std::process::Command;
 
 use anyhow::Result;
-use log::debug;
+use tracing::debug;
 #[cfg(target_os = "linux")]
 use nix::unistd::Uid;
 use semver::Version;

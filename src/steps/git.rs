@@ -8,7 +8,7 @@ use console::style;
 use futures::stream::{iter, FuturesUnordered};
 use futures::StreamExt;
 use glob::{glob_with, MatchOptions};
-use log::{debug, error};
+use tracing::{debug, error};
 use tokio::process::Command as AsyncCommand;
 use tokio::runtime;
 

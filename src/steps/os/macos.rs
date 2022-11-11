@@ -4,7 +4,7 @@ use crate::executor::RunType;
 use crate::terminal::{print_separator, prompt_yesno};
 use crate::{utils::require, Step};
 use anyhow::Result;
-use log::debug;
+use tracing::debug;
 use std::fs;
 use std::process::Command;
 

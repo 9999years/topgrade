@@ -11,7 +11,7 @@ use anyhow::Context;
 use chrono::{Local, Timelike};
 use console::{style, Key, Term};
 use lazy_static::lazy_static;
-use log::{debug, error};
+use tracing::{debug, error};
 #[cfg(target_os = "macos")]
 use notify_rust::{Notification, Timeout};
 #[cfg(windows)]
@@ -104,7 +104,7 @@ impl Terminal {
                     command.args(["-a", "Topgrade", "Topgrade"]);
                     command.arg(message.as_ref());
                     if let Err(err) = command.output_checked() {
-                        log::error!("{err:?}");
+                        tracing::error!("{err:?}");
                     }
                 }
             }

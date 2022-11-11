@@ -4,7 +4,7 @@ use std::process::Command;
 
 use anyhow::Result;
 use directories::BaseDirs;
-use log::debug;
+use tracing::debug;
 use walkdir::WalkDir;
 
 use crate::command::CommandExt;

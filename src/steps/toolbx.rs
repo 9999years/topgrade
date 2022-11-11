@@ -4,7 +4,7 @@ use crate::command::CommandExt;
 use crate::config::Step;
 use crate::terminal::print_separator;
 use crate::{execution_context::ExecutionContext, utils::require};
-use log::debug;
+use tracing::debug;
 use std::path::Path;
 use std::{path::PathBuf, process::Command};
 

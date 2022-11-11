@@ -10,7 +10,7 @@ use anyhow::Result;
 use directories::BaseDirs;
 use home;
 use ini::Ini;
-use log::debug;
+use tracing::debug;
 
 use crate::error::SkipStep;
 use crate::execution_context::ExecutionContext;

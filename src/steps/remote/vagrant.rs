@@ -3,7 +3,7 @@ use std::process::Command;
 use std::{fmt::Display, rc::Rc, str::FromStr};
 
 use anyhow::Result;
-use log::{debug, error};
+use tracing::{debug, error};
 use regex::Regex;
 use strum::EnumString;
 

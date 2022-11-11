@@ -7,7 +7,7 @@ use std::{fs, io::Write};
 
 use anyhow::{Context, Result};
 use directories::BaseDirs;
-use log::debug;
+use tracing::debug;
 use tempfile::tempfile_in;
 
 use crate::command::{CommandExt, Utf8Output};
